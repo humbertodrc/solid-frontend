@@ -20,7 +20,7 @@ export const ProductForm = () => {
 
 	return (
 		<div className="p-4 w-3/4 mx-auto">
-			<form className="bg-gray-900 shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+			<form className="border border-gray-500 shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
 				<div className="mb-4">
 					<input
 						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

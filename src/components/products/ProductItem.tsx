@@ -7,6 +7,9 @@ interface ProductItemProps {
 
 export const ProductItem:FC<ProductItemProps> = ({product}) => {
   return (
-    <li>{product.name} precio <span className='text-gray-400'>${product.price}</span></li>
+    <div className="border border-gray-500 shadow-md rounded p-4 m-4">
+      <h3 className="text-xl font-semibold">{product.name}</h3>
+      <p className="text-gray-400">Precio: ${product.price}</p>
+    </div>
   )
 }
