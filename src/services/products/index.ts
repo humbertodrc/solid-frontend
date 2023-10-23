@@ -72,3 +72,22 @@ export const updateProduct = async (url: string, product: Product): Promise<Prod
   
     }
 }
+
+export const deleteProduct = async (url: string, id: number): Promise<void> => {
+      
+      try {
+        const response = await fetch(`${url}/${id}`, {
+          method: 'DELETE',
+        });
+    
+        if (!response.ok) {
+          throw new Error('Error en la llamada a la API');
+        }
+    
+      } catch (error) {
+        
+        console.log(error);
+        throw new Error("Error network");
+    
+      }
+}

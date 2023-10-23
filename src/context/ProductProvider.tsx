@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ProductService from '../components/products/Products';
 import { Product } from '../types';
 import { ProductContext } from './ProductContext';
@@ -15,8 +15,8 @@ const ProductProvider:FC<ProductProviderProps> = ({ children }) => {
 
 
 	const fetchProducts = async () => {
-		const products = await productService.getAllProducts();
-		setProducts(products);
+		const productsData = await productService.getAllProducts();
+		setProducts(productsData);
   };
   
   const addProduct = async (product: Product) => {
@@ -24,15 +24,28 @@ const ProductProvider:FC<ProductProviderProps> = ({ children }) => {
     setProducts([...products, newProduct]);
   };
 
+  const deleteProduct = async (id: number) => {
+    await productService.deleteProduct(id);
+    fetchProducts();
+  };
+
+  const printProducts = async() => {
+    const products = await productService.getAllProducts();
+
+    productService.printReport(products)
+  }
+
 	useEffect(() => {
-		fetchProducts();
+    fetchProducts();
+    printProducts();
 	}, []);
 
 
   return (
     <ProductContext.Provider value={{
       products,
-      addProduct
+      addProduct,
+      deleteProduct
     }}>
       {children}
     </ProductContext.Provider>
