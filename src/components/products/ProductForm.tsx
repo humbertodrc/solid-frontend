@@ -1,5 +1,5 @@
 import { useContextProduct } from '../../hooks/useContextProduct';
-import { Product } from '../../types';
+import { createNewProduct } from '../../utilities';
 
 export const ProductForm = () => {
 
@@ -10,10 +10,7 @@ export const ProductForm = () => {
 
     const formData = new FormData(e.currentTarget);
     
-    const newProduct: Product = {
-      name: formData.get('name')?.toString() || '',
-      price: Number(formData.get('price'))
-    }
+    const newProduct = createNewProduct(formData);
 
     addProduct(newProduct);
 
