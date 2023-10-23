@@ -4,9 +4,18 @@ import {
 	getProducts,
 	updateProduct,
 } from "../../services/products";
-import {Product} from "../../types";
+import { Product } from "../../types";
 
-class ProductService {
+interface IProductService {
+	getAllProducts(): Promise<Product[]>;
+	getProductById(id: number): Promise<Product>;
+	createProduct(product: Product): Promise<Product>;
+	updateProduct(product: Product): Promise<Product>;
+	deleteProduct(id: number): Promise<void>;
+	printReport(products: Product[]): void;
+}
+
+class ProductService implements IProductService {
 	private url: string;
 
 	constructor(url: string) {
