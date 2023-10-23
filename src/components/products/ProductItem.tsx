@@ -18,7 +18,7 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
     <div className="border border-gray-500 shadow-md rounded p-4 m-4">
       <h3 className="text-xl font-semibold">{product.name}</h3>
       <p className="text-gray-400">Precio: ${product.price}</p>
-      <button onClick={handleDelete}>Eliminar</button>
+      <button className='underline hover:text-red-400' onClick={handleDelete}>Eliminar</button>
     </div>
   )
 }

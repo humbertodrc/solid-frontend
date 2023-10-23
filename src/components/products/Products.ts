@@ -73,6 +73,7 @@ class ProductService {
     }
 	}
 
+  // Metodo para imprimir un reporte de productos
 	printReport(products: Product[]): void {
 		console.log("Reporte de productos");
 		console.log("====================");
