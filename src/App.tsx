@@ -1,7 +1,6 @@
 import "./App.css";
 import { ProductForm } from './components/products/ProductForm';
-import {ProductList} from "./components/products/ProductList";
-import {ReportPrint} from './components/reports/ReportPrint';
+import { ProductList } from "./components/products/ProductList";
 import ProductProvider from "./context/ProductProvider";
 
 function App() {
@@ -11,7 +10,6 @@ function App() {
 			<ProductProvider>
         <ProductList />
 				<ProductForm />
-				{/* <ReportPrint /> */}
 			</ProductProvider>
 		</main>
 	);

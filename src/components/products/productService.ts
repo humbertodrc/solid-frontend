@@ -1,9 +1,3 @@
-import {
-	createProduct,
-	deleteProduct,
-	getProducts,
-	updateProduct,
-} from "../../services/products";
 import { Product } from "../../types";
 
 interface IProductService {
@@ -25,61 +19,97 @@ class ProductService implements IProductService {
 	// Metodo para obtener los productos
 	async getAllProducts(): Promise<Product[]> {
 		try {
-			const products = await getProducts(this.url);
-			return products;
+			const response = await fetch(this.url);
+	
+			if (!response.ok) {
+				throw new Error("Error en la llamada a la API");
+			}
+	
+			const data = await response.json();
+			return data;
 		} catch (error) {
-			console.error(error);
-			throw new Error("Error en la obtención de productos");
+			console.log(error);
+			throw new Error("Error network");
 		}
 	}
 
 	// Metodo para obtener un producto por id
 	async getProductById(id: number): Promise<Product> {
 		try {
-			const products = await getProducts(this.url);
-			const product = products.find((product) => product.id === id);
-			if (product) {
-				return product;
-			} else {
-				throw new Error("Producto no encontrado");
+			const response = await fetch(`${this.url}/${id}`);
+	
+			if (!response.ok) {
+				throw new Error("Error en la llamada a la API");
 			}
+	
+			const data = await response.json();
+			return data;
 		} catch (error) {
-			console.error(error);
-			throw new Error("Error en la obtención de productos");
+			console.log(error);
+			throw new Error("Error network");
 		}
 	}
 
 	// Metodo para crear un producto
 	async createProduct(product: Product): Promise<Product> {
 		try {
-			const response = await createProduct(this.url, product);
-			return response;
+			const response = await fetch(this.url, {
+				method: "POST",
+				body: JSON.stringify(product),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+	
+			if (!response.ok) {
+				throw new Error("Error en la llamada a la API");
+			}
+	
+			const data = await response.json();
+			return data;
 		} catch (error) {
-			console.error(error);
-			throw new Error("Error en la creación del producto");
+			console.log(error);
+			throw new Error("Error network");
 		}
 	}
 
 	// Metodo para actualizar un producto
 	async updateProduct(product: Product): Promise<Product> {
 		try {
-			const response = await updateProduct(this.url, product);
-			return response;
+			const response = await fetch(`${this.url}/${product.id}`, {
+				method: "PUT",
+				body: JSON.stringify(product),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+	
+			if (!response.ok) {
+				throw new Error("Error en la llamada a la API");
+			}
+	
+			const data = await response.json();
+			return data;
 		} catch (error) {
-			console.error(error);
-			throw new Error("Error en la actualización del producto");
+			console.log(error);
+			throw new Error("Error network");
 		}
 	}
 
 	// Metodo para eliminar un producto
 	async deleteProduct(id: number): Promise<void> {
-    try {
-      const response = await deleteProduct(this.url, id);
-      return response;
-    } catch (error) {
-      console.error(error);
-      throw new Error("Error en la eliminación del producto");
-    }
+		try {
+			const response = await fetch(`${this.url}/${id}`, {
+				method: "DELETE",
+			});
+	
+			if (!response.ok) {
+				throw new Error("Error en la llamada a la API");
+			}
+		} catch (error) {
+			console.log(error);
+			throw new Error("Error network");
+		}
 	}
 
   // Metodo para imprimir un reporte de productos

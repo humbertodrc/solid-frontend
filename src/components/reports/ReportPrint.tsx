@@ -1,13 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContextProduct } from '../../hooks/useContextProduct';
 import ReportGenerator from "./Report";
 import { useEffect } from 'react';
 
 export const ReportPrint = () => {
 	// Datos para el informe
-	const reportData = [
-		{name: "John Doe", age: 30},
-		{name: "Jane Smith", age: 25},
-		// Agrega más datos según sea necesario
-	];
+	const {products:reportData} = useContextProduct();
 
 	const reportGenerator = new ReportGenerator();
 
@@ -26,7 +24,7 @@ export const ReportPrint = () => {
 
   useEffect(() => {
     getReport();
-  }, []);
+  }, [reportData]);
 
 	return (
 		<>
