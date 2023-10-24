@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import ProductService from '../components/products/Products';
+import ProductService from '../components/products/productService';
 import { Product } from '../types';
 import { ProductContext } from './ProductContext';
 
